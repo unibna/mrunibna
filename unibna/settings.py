@@ -27,7 +27,7 @@ SECRET_KEY = "hehe"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://unibna.herokuapp.com/']
+ALLOWED_HOSTS = ['unibna.herokuapp.com']
 
 
 # Application definition
