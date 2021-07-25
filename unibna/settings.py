@@ -153,7 +153,8 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 #     BASE_DIR / 'static',
 # ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # for heroku deploy
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+ # for heroku deploy
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL  = '/media/'
