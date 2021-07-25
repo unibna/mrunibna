@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-18@)^5x#i*7uj(^hu((4o5s%jphc^224+%%j6(v^di28rpg)z$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://unibna.herokuapp.com/']
 
 
 # Application definition
@@ -45,6 +46,8 @@ INSTALLED_APPS = [
 
     'crispy_forms', # for nice forms
     'ckeditor', # for rich text editor 
+
+    'whitenoise.runserver_nostatic', # for heroku deploy
 ]
 
 MIDDLEWARE = [
@@ -55,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'whitenoise.middleware.WhiteNoiseMiddleware', # for heroku deploy
 ]
 
 ROOT_URLCONF = 'unibna.urls'
@@ -134,9 +139,16 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom configuration
+SECRET_KEY = os.environ.get('SECRET_KEY')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # for heroku deploy
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL  = '/media/'
@@ -146,3 +158,4 @@ AUTH_USER_MODEL = 'user.CustomUser'
 
 # For Crispy Forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
