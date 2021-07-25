@@ -1,0 +1,65 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2>{{quiz.title}} - Result</h2>
+    
+    <div class="card p-3">
+
+        {% for qc in ques_cor_list %} 
+        <div class="row">
+            <div class="col">
+                {{qc.0.text}}
+            </div>
+            <div class="col">
+                {% if qc.1 == "Correct" %}
+                    <span class="badge badge-success">Corect</span>
+                {% elif qc.1 == "Incorrect" %}
+                    <span class="badge badge-danger">Incorect</span>
+                {% else %} 
+                    <span class="badge badge-dark">No answer</span>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="row border-top mt-2">
+            <div class="col">
+                Score
+            </div>
+            <div class="col">
+                {{score}}
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card p-3 mt-2">
+        <div class="row text-center">
+            <div class="col">
+                <span class="badge badge-success">Corect</span>
+            </div>
+            <div class="col">
+                +1
+            </div>
+            <div class="col">
+                <span class="badge badge-danger">Incorect</span>
+            </div>
+            <div class="col">
+                -1
+            </div>
+            <div class="col">
+                <span class="badge badge-dark">No answer</span>
+            </div>
+            <div class="col">
+                +0
+            </div>
+        </div>
+    </div>
+
+    <a class="btn btn-dark mt-2" href="{% url 'quiz_list' %}">Back</a>
+
+</div>
+
+{% endblock %}

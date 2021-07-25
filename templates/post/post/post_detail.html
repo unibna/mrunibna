@@ -1,0 +1,53 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'post/css/post_list.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-2">
+    <div class="row">
+
+        <!-- postcontent -->
+        <div class="col-lg-8">
+            <!-- posts -->
+            <div class="card border-0 p-0">
+                <div class="card-header bg-transparent">
+                    <h3 class="card-title">{{post.title}}</h3>
+                    <a href="#" class="badge badge-info">{{post.author}}</a><small> - {{post.created}}</small>
+                </div>
+                <div class="card-body">
+                    {{post.content|safe}}
+                </div>
+            </div>
+            <!-- end posts -->
+        </div>
+        <!-- end postcontent -->
+
+        <!-- sidebar -->
+        <div class="col-lg-4 border-left p-2">
+
+            <!-- categories -->
+            <div class="row m-1 pb-2">
+                <div class="col">
+                    <h5 class="text-post-title">Categories</h5>
+                    {% for cat in category_list %}
+                        {% if cat in post.categories %}
+                            <a class="btn btn-warning btn-block rounded" href="{% url 'category_detail' cat.slug %}">{{cat.name}}</a>
+                        {% else %}
+                            <a class="btn btn-dark btn-block rounded" href="{% url 'category_detail' cat.slug %}">{{cat.name}}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- end categories -->
+
+        </div>
+        <!-- end sidebar -->
+
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}{% endblock %}

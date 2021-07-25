@@ -1,0 +1,130 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block link %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <!-- highlight -->
+    <div class="container">
+        <div class="card post-highlight border-0">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card h-400 border-0">
+                        <div class="row no-gutters pb-2">
+                            <div class="col-lg-8 text-center">
+                                <!-- <a href=""><img class="rounded" height="400px" src="{% static 'home\img\home-default\highlight-thumbnail-1.jpg' %}"></a> -->
+                                <a class="btn"><img class="rounded" height="400px" src="{{highlight_post.thumbnail.url}}"></a>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card-body">
+                                    <h3 class="card-tile text-post-title">{{highlight_post}}</h3>
+                                    <small>By {{highlight_post.author}} - {{highlight_post.created}}</small>
+                                    <p class="card-post-text text-post-content">{{highlight_post.description}}</p>
+                                    <a class="card-text text-post-content" href="{% url 'post_detail' highlight_post.slug %}">Read more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end highlight -->
+    
+<!-- postline -->
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p class="d-block text-quote border-top border-bottom text-center"><small>- You dont know what you dont know -</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end postline -->
+    
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+
+            <!-- latest post -->
+            <div class="col-lg-12">
+                <div class="card text-white post-latest" style="overflow: hidden;">
+                    <img class="card-img img-fluid post-latest-img"  height="200px" src="{{latest_post.thumbnail.url}}">
+
+                    <div class="card-img-overlay text-light" style="background-color: rgba(0,0,0,0.5);">
+                        <a class="text-light" href="{% url 'post_detail' latest_post.slug %}">
+                        <h5 class="card-title text-post-title">{{latest_post.title}}</h5>
+                            <p class="card-text card-post-text text-post-content">{{latest_post.description}}</p>
+                            <p class="card-text text-post-content">{{latest_post.created}}</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- end latest post -->
+
+        <div class="row mt-4">
+            <!-- postlist -->
+            <div class="col-lg-8">
+                <!-- posts -->
+                {% for post in post_list %}
+                <div class="row border-bottom">
+                    <div class="col-sm-4">
+                        <a class="btn"><img class="rounded" width="200px" height="200px" src="{{post.thumbnail.url}}"></a>
+                    </div>
+                    <div class="col-sm-8 pt-2">
+                        <div class="card border-0 justify-content-end">
+                            <h5 class="card-tile text-post-title">{{post.title}}</h5>
+                            <small>By {{post.author}} - {{post.created}}</small>
+                            <p class="card-post-text text-post-content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged</p>
+                            <a class="text-post-content" href="{% url 'post_detail' post.slug %}">Read more</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- end posts -->
+
+                <!-- pagination -->
+                <nav class="mt-2">
+                    <div class="row">
+                        <div class="col d-flex justify-content-start">
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <a class="btn btn-link text-post-content" href="{% url 'post_list' %}">More</a>
+                        </div>
+                    </div>
+                </nav>
+                <!-- end pagination -->
+                
+            </div>
+            <!-- end postlist -->
+
+            <!-- sidebar -->
+            <div class="col-lg-4 border-left p-2">
+
+                <!-- categories -->
+                <div class="row">
+                    <div class="col">
+                        <h5 class="text-post-title">Categories</h5>
+                        {% for cat in category_list %}
+                        <a class="btn btn-dark btn-block rounded" href="{% url 'category_detail' cat.slug %}">{{cat.name}}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- end categories -->
+
+            </div>
+            <!-- end sidebar -->
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block script %}{% endblock %}

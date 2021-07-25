@@ -1,0 +1,62 @@
+{% extends 'home/base.html' %}
+
+{% block link %}{% endblock %}
+
+{% block content %}
+<div class="container mt-2">
+    <div class="row">
+
+        <!-- postlist -->
+        <div class="col-lg-8">
+            <!-- posts -->
+            {% if category.post_set.count == 0%}
+                <h5 class="card-tile text-post-title">Oops! There is nothing here.</h5>
+                <p class="card-post-text text-post-content">Please comeback later!</p>
+                <a href="{% url 'post_list'%}">Back to post list.</a>
+            {% else %}
+            {% for post in category.post_set.all %}
+            <div class="row border-bottom">
+                <div class="col-sm-4">
+                    <a class="btn"><img class="rounded" width="200px" height="200px" src="{{post.thumbnail.url}}"></a>
+                </div>
+                <div class="col-sm-8 pt-2">
+                    <div class="card border-0 justify-content-end">
+                        <h5 class="card-tile text-post-title">{{post.title}}</h5>
+                        <small>By {{post.author}} - {{post.created}}</small>
+                        <p class="card-post-text text-post-content">{{post.description}}</p>
+                        <a href="{% url 'post_detail' post.slug %}">Read more</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <!-- end posts -->
+        </div>
+        <!-- end postlist -->
+        
+        <!-- sidebar -->
+        <div class="col-lg-4 border-left p-2">
+
+            <!-- categories -->
+            <div class="row m-1 pb-2">
+                <div class="col">
+                    <h5 class="text-post-title">Categories</h5>
+                    {% for cat in category_list %}
+                        {% if cat == category %}
+                        <a class="btn btn-warning btn-block rounded" href="{% url 'category_detail' cat.slug %}">{{cat.name}}</a>
+                        {% else %}
+                        <a class="btn btn-dark btn-block rounded" href="{% url 'category_detail' cat.slug %}">{{cat.name}}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- end categories -->
+
+        </div>
+        <!-- end sidebar -->
+
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}{% endblock %}

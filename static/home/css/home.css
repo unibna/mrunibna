@@ -1,0 +1,57 @@
+/*Header*/
+.mainheader {
+    height: 75px;
+}
+
+.text-header-logo {
+    font-family: 'Zen Loop', cursive;
+    font-weight: bold;
+}
+
+.text-quote {
+    font-family: 'Quicksand', sans-serif;
+    font-style: italic;
+    font-size: 20px;
+}
+
+.text-post-title {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+}
+
+.text-post-content {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+}
+
+.content-block {
+    min-height: 2000px;
+    margin: 0;
+    padding: 0;
+}
+
+.post-hightlight {
+    height: 500px;
+}
+
+.card-post-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.post-latest {
+    height: 200px;
+}
+
+.post-latest-img {
+    object-fit: scale-down;
+    object-position: center;
+}
+
+.footer-block {
+    height: 50px;
+    /* background-color: beige; */
+}

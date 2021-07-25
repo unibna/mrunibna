@@ -1,0 +1,45 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2>{{quiz.name}}</h2>
+    
+    <form method="POST" action="{% url 'result_detail' quiz.slug %}"> 
+        {% csrf_token %}
+
+        {% for ques in quiz.get_questions %}
+        <div class="card my-3">
+
+            <div class="card-header bg-info text-light">
+                {{ques.text}}
+            </div>
+
+            {% for ans in ques.get_answers %}
+            <div class="form-check ml-1">
+                <input class="form-check-input" type="radio" name="{{ques.id}}" value="{{ans.id}}">
+                <label class="form-check-label pl-4">
+                {{ans.text}}
+                </label>
+            </div>
+            {% endfor %}
+
+        </div>  
+        {% endfor %}
+    
+        <div class="card border-0 my-3">
+            <div class="row">
+                <div class="col">
+                    <a class="btn btn-dark" href="{% url 'quiz_list' %}">Back</a>
+                </div>
+                <div class="col text-right">
+                    <button class="btn btn-warning" type="submit" value="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

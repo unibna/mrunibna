@@ -1,0 +1,26 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <div class="card p-2">
+        {% for quiz in quiz_list %}
+        <div class="row">
+            <div class="col">
+                <h5>{{quiz.title}}</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <a href="{{quiz.topic.slug}}" class="badge badge-success">{{quiz.topic.slug}}</a>
+                <a href="#" class="badge badge-success">{{quiz.author}}</a>
+            </div>
+            <div class="col text-right">
+                <a href="{% url 'quiz_detail' quiz.slug %}" class="badge badge-warning">Test</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
