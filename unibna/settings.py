@@ -154,6 +154,7 @@ STATICFILES_DIRS = [
 
 # for heroku deploy
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL  = '/media/'
