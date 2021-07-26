@@ -15,12 +15,11 @@ def HomeView(request):
     # get context
     category_list = Category.objects.all()
 
-    post_list = Post.objects.order_by('created')
+    post_list = Post.objects.order_by('created').reverse()
 
     if post_list.count() > 2:
         highlight_post = post_list[0]
         latest_post = post_list[1]
-
         post_list = post_list[2:]
     else:
         highlight_post = None
