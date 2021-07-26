@@ -17,7 +17,7 @@ def HomeView(request):
 
     posts_order = Post.objects.order_by('created')
 
-    if posts_order.count > 2:
+    if posts_order.count() > 2:
         highlight_post = posts_order[0]
         latest_post = posts_order[1]
 
